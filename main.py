@@ -8,16 +8,31 @@ class ParkingBay:
 # this is the constructor; it initialises the attributes (that are private) so that it restricts unauthorised access from users
     def __init__(self, bayNumber):
         self.__bayNumber = bayNumber
-        self.__number_plate = ""
+        self.__s_plate = ""
         self.__occupancy = False
 
+    # this is a mutator method that will record the entry of a car in the parking bay (the list of objects). True is returned upon successful parking.
     def parkCar(self, plate):
+        if self.__occupancy == True:
+            print("Error: Bay is already occupied.")
+        elif s_plate = "":
+            print("Error: Plate number cannot be empty.")
+        else:
+            __plate = s_plate
+            __occupancy = True
+            return True
 
 
 
 
 
-    def removeCar():
+
+
+
+
+    def removeCar(self, plate):
+
+
 
 
 
