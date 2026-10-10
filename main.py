@@ -12,17 +12,17 @@ class ParkingBay:
         self.__occupancy = False
 
     # this is a mutator method that will record the entry of a car in the parking bay (the list of objects). True is returned upon successful parking, and basic validation is included.
-    def parkCar(self, plate):
+    def parkCar(self, s_plate):
         if self.__occupancy == True:
             print("Error: Bay is already occupied.")
-        elif s_plate = "":
+        elif s_plate == "":
             print("Error: Plate number cannot be empty.")
         else:
-            __plate = s_plate
-            __occupancy = True
+            self.__s_plate = s_plate
+            self.__occupancy = True
             return True
     # this is the second mutator method that will remove the car. It validates whether the user is trying to remove from an unoccupied bay (to which it denies it and displays an error), and removes it successfully if no user input flaws are there.
-    def removeCar(self, plate):
+    def removeCar(self):
         if self.__occupancy == False:
             print("Error: Bay is already empty.")
         else:
