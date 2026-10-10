@@ -3,6 +3,9 @@
 # Author: Sanjeev J
 # Date created: 04/10/2026
 
+lstBays = []
+
+
 class ParkingBay:
 
 # this is the constructor; it initialises the attributes (that are private) so that it restricts unauthorised access from users
@@ -49,3 +52,15 @@ class ParkingBay:
 
 # this is the 5th method (3rd getter) which will return the license plate. The task sheet says for purposes of "display or saving", and I'll figure the display part out later.
     def getPlate(self):
+
+
+def viewStatus(lstBays):
+    bay_symbols = []
+    for bay in lstBays:
+        # I think you call the public method here instead of directly accessing the list (and the .txt file)
+        if bay.isOccupied() == True:
+            plate = bay.getPlate()
+            # I am going to implement the feedback Ms Constanza has given me, and include the license plates on occupied bays as well.
+            bay_symbols.append(f" {s_plate} ")
+        else:
+            bay_symbols.append(" Free ")
