@@ -54,6 +54,9 @@ class ParkingBay:
     def getPlate(self):
 
 
+# everything from here onwards stay outside the class; the communicate with one another when the public method is called to access the lstBays.
+
+
 def viewStatus(lstBays):
     bay_symbols = []
     for bay in lstBays:
@@ -93,4 +96,25 @@ def recordEntry():
     i_bay = int(s_bay)
     # Since lists are zero index, I make sure to subtract one to prevent errors in the boundary numbers (without it, bay 10 from user input could mean bay 11 which would not exist)
     desired_bay = lstBays[i_bay - 1]
+
+    if desired_bay.isOccupied == True:
+        print("Sorry, the bay is already occupied.")
+    else:
+        s_plate = input("Please enter your license plate: ")
+
+        while s_plate == "":
+            print("Error: Number plate cannot be empty.")
+            number_plate = input("Please enter your license plate: ")
+
+    # I just realised that I need to call the public method somewhere within the function, so I'm assigning it to a variable so it gets called (given that if it passes the validation checks)
+        recorded = desired_bay.isOccupied(s_plate)
+
+        if recorded:
+            print("Success! Your car " + s_plate + " has been parked in " + str(bay))
+
+
+
+
+
+
 
