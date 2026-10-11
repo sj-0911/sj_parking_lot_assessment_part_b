@@ -78,6 +78,19 @@ def calculateTotals():
 # I will add something to show the total number of bays; I feel like adding occupied bays and free bays is more appropriate than setting a default value of 10 for total bays
     total_bays = free_bays + occupied_bays
 
-    print("The number of free bays available is: " + str(f_bays))
-    print("The number of occupied bays available is: " + str(o_bays))
-    print("The number of total bays are: " + str(o_bays + f_bays))
+    print("The number of free bays available is: " + str(free_bays))
+    print("The number of occupied bays available is: " + str(occupied_bays))
+    print("The number of total bays are: " + str(occupied_bays + free_bays))
+
+def recordEntry():
+    s_bay = input("Please enter bay number to enter your car (1 - 10): ")
+
+
+    while s_bay not in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:
+        print("Invalid bay number. Please choose between 1 and 10.")
+        s_bay = input("Please enter bay number to enter your car (1 - 10): ")
+
+    i_bay = int(s_bay)
+    # Since lists are zero index, I make sure to subtract one to prevent errors in the boundary numbers (without it, bay 10 from user input could mean bay 11 which would not exist)
+    desired_bay = lstBays[i_bay - 1]
+
