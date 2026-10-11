@@ -52,6 +52,7 @@ class ParkingBay:
 
 # this is the 5th method (3rd getter) which will return the license plate. The task sheet says for purposes of "display or saving", and I'll figure the display part out later.
     def getPlate(self):
+        return self.__s_plate
 
 
 # everything from here onwards stay outside the class; the communicate with one another when the public method is called to access the lstBays.
@@ -62,7 +63,7 @@ def viewStatus(lstBays):
     for bay in lstBays:
         # I think you call the public method here instead of directly accessing the list (and the .txt file)
         if bay.isOccupied() == True:
-            plate = bay.getPlate()
+            s_plate = bay.getPlate()
             # I am going to implement the feedback Ms Constanza has given me, and include the license plates on occupied bays as well.
             bay_symbols.append(f" {s_plate} ")
         else:
@@ -88,8 +89,8 @@ def calculateTotals():
 def recordEntry():
     s_bay = input("Please enter bay number to enter your car (1 - 10): ")
 
-
-    while s_bay not in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:
+# I have implemented my Part A feedback here; in case the bay count expands in size, my validation is scalable and doesn't need to be modified
+    while s_bay not in (1 <= int(s_bay) <= len(lstBays)):
         print("Invalid bay number. Please choose between 1 and 10.")
         s_bay = input("Please enter bay number to enter your car (1 - 10): ")
 
@@ -110,12 +111,13 @@ def recordEntry():
         recorded = desired_bay.parkCar(s_plate)
 
         if recorded:
-            print("Success! Your car " + s_plate + " has been parked in " + str(bay)).
+            print("Success! Your car " + s_plate + " has been parked in " + s_bay)
 
 def removeCar():
     s_bay = input("Please enter bay number to remove your car (1 - 10): ")
 
-    while s_bay not in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:
+# This is the other line where I've implemented my Part A feedback on validation
+    while s_bay not in (1 <= int(s_bay) <= len(lstBays)):
         print("Invalid bay number. Please choose between 1 and 10.")
         s_bay = input("Please enter bay number to remove your car (1 - 10): ")
 
@@ -129,6 +131,18 @@ def removeCar():
         removed = lstBays.removeCar()
         print("Success! Your car has been removed.")
 
+def displayMenu():
+#insert loadData() function after coding in another branch
+    while_running = True
+    while while_running:
+        print("Hello! Below are the menu options for Sanjeev's Parking Lot Tracker:")
+        print("1. Record car entering the bay")
+        print("2. Remove car from bay")
+        print("3. View status of bays")
+        print("4. Display statistics ")
+        print("5. Save data and exit")
+
+        user_choice = input("Please select an option from 1-5: ")
 
 
 
