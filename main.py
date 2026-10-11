@@ -64,3 +64,20 @@ def viewStatus(lstBays):
             bay_symbols.append(f" {s_plate} ")
         else:
             bay_symbols.append(" Free ")
+
+def calculateTotals():
+    free_bays = 0
+    occupied_bays = 0
+
+
+    for bay in lstBays():
+        if bay.isOccupied() == True:
+            occupied_bays += 1
+        else:
+            free_bays += 1
+# I will add something to show the total number of bays; I feel like adding occupied bays and free bays is more appropriate than setting a default value of 10 for total bays
+    total_bays = free_bays + occupied_bays
+
+    print("The number of free bays available is: " + str(f_bays))
+    print("The number of occupied bays available is: " + str(o_bays))
+    print("The number of total bays are: " + str(o_bays + f_bays))
