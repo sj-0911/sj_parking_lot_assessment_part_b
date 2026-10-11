@@ -107,10 +107,28 @@ def recordEntry():
             number_plate = input("Please enter your license plate: ")
 
     # I just realised that I need to call the public method somewhere within the function, so I'm assigning it to a variable so it gets called (given that if it passes the validation checks)
-        recorded = desired_bay.isOccupied(s_plate)
+        recorded = desired_bay.parkCar(s_plate)
 
         if recorded:
-            print("Success! Your car " + s_plate + " has been parked in " + str(bay))
+            print("Success! Your car " + s_plate + " has been parked in " + str(bay)).
+
+def removeCar():
+    s_bay = input("Please enter bay number to remove your car (1 - 10): ")
+
+    while s_bay not in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:
+        print("Invalid bay number. Please choose between 1 and 10.")
+        s_bay = input("Please enter bay number to remove your car (1 - 10): ")
+
+
+    i_bay = int(s_bay)
+    desired_bay = lstBays[i_bay - 1]
+
+    if lstBays.isOccupied(s_bay) == False:
+        print("Error: Bay is already empty. ")
+    else:
+        removed = lstBays.removeCar()
+        print("Success! Your car has been removed.")
+
 
 
 
