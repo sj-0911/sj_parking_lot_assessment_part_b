@@ -9,7 +9,27 @@ def saveData():
         bayNumber = bay.getBayNumber()
         s_plate = bay.getPlate()
         b_occupied = bay.isOccupied()
-# i asked gemini (the ai engine) about adding a "\n" at the end of the file.write() built in function; i've put a screenshot of the chat in my documentation
         file.write(str(bayNumber) + "," + s_plate + "," + str(b_occupied) + "\n")
     file.close()
     print("Thank you user. Your data has been successfully saved to parking_data.txt")
+
+def loadData():
+    file = open("parking_data.txt", "r")
+    for line in file:
+        clean_line = line.strip()
+        if clean_line != "":
+          list_data = clean_line.split(",")
+          
+          i_bay = int(list_data[0])
+          s_plate = list_data[1]
+          s_occupied = list_data[2]
+
+          if s_occupied == "True":
+            b_occupied = True
+            lstBays[i_bay - 1].parkCar(s_plate)
+          else:
+            b_occupied = False
+
+
+    file.close()
+    print("Thank you user. The data has been successfully loaded from parking_data.txt")
