@@ -3,10 +3,12 @@
 # Author: Sanjeev J
 # Date created: 04/10/2026
 
-lstBays = []
+
 
 
 class ParkingBay:
+
+
 
 # this is the constructor; it initialises the attributes (that are private) so that it restricts unauthorised access from users
     def __init__(self, bayNumber):
@@ -90,7 +92,7 @@ def recordEntry():
     s_bay = input("Please enter bay number to enter your car (1 - 10): ")
 
 # I have implemented my Part A feedback here; in case the bay count expands in size, my validation is scalable and doesn't need to be modified
-    while s_bay not in (1 <= int(s_bay) <= len(lstBays)):
+    while s_bay not in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:
         print("Invalid bay number. Please choose between 1 and 10.")
         s_bay = input("Please enter bay number to enter your car (1 - 10): ")
 
@@ -117,7 +119,7 @@ def removeCar():
     s_bay = input("Please enter bay number to remove your car (1 - 10): ")
 
 # This is the other line where I've implemented my Part A feedback on validation
-    while s_bay not in (1 <= int(s_bay) <= len(lstBays)):
+    while s_bay not in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:
         print("Invalid bay number. Please choose between 1 and 10.")
         s_bay = input("Please enter bay number to remove your car (1 - 10): ")
 
@@ -132,6 +134,7 @@ def removeCar():
         print("Success! Your car has been removed.")
 
 def displayMenu():
+    
 #insert loadData() function after coding in another branch
     while_running = True
     while while_running:
@@ -143,6 +146,28 @@ def displayMenu():
         print("5. Save data and exit")
 
         user_choice = input("Please select an option from 1-5: ")
+
+        while user_choice not in ["1", "2", "3", "4", "5"]:
+            print("Invalid choice. Please choose only provided menu options")
+            user_choice = input("Please select an option from 1-5: ")
+
+        if user_choice == "1":
+            print("Option 1 selected.")
+            recordEntry()
+        elif user_choice == "2":
+            removeCar()
+        elif user_choice == "3":
+            print("Option 3 selected.")
+            viewStatus()
+        elif user_choice == "4":
+            calculateTotals()
+        elif user_choice == "5":
+            saveData()
+            while_running = False
+            print("The program will exit now. Thank you for using the program.")
+
+        else:
+            print("Error: Selection not valid. Please choose only the provided options (1-5)")
 
 
 # File: sj_parking_lot_tracker_part_b.py (the file-related functions branch)
@@ -174,12 +199,14 @@ def loadData():
 
             if s_occupied == "True":
                 b_occupied = True
-                lstBays[i - 1].parkCar(s_plate)
+                lstBays[i_bay - 1].parkCar(s_plate)
             else:
                 b_occupied = False
 
     file.close()
     print("Thank you user. The data has been successfully loaded from parking_data.txt")
+
+displayMenu()
 
 
 
