@@ -5,10 +5,7 @@
 
 
 
-
 class ParkingBay:
-
-
 
 # this is the constructor; it initialises the attributes (that are private) so that it restricts unauthorised access from users
     def __init__(self, bayNumber):
@@ -134,8 +131,21 @@ def removeCar():
         print("Success! Your car has been removed.")
 
 def displayMenu():
-    
-#insert loadData() function after coding in another branch
+    lstBays = [
+        ParkingBay(1),
+        ParkingBay(2),
+        ParkingBay(3),
+        ParkingBay(4),
+        ParkingBay(5),
+        ParkingBay(6),
+        ParkingBay(7),
+        ParkingBay(8),
+        ParkingBay(9),
+        ParkingBay(10),
+    ]
+
+    loadData()
+
     while_running = True
     while while_running:
         print("Hello! Below are the menu options for Sanjeev's Parking Lot Tracker:")
