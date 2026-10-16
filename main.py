@@ -68,7 +68,7 @@ def viewStatus(lstBays):
         else:
             bay_symbols.append(" Free ")
 
-def calculateTotals():
+def calculateTotals(lstBays):
     free_bays = 0
     occupied_bays = 0
 
@@ -85,7 +85,7 @@ def calculateTotals():
     print("The number of occupied bays available is: " + str(occupied_bays))
     print("The number of total bays are: " + str(occupied_bays + free_bays))
 
-def recordEntry():
+def recordEntry(lstBays):
     s_bay = input("Please enter bay number to enter your car (1 - 10): ")
 
 # I have implemented my Part A feedback here; in case the bay count expands in size, my validation is scalable and doesn't need to be modified
@@ -97,7 +97,7 @@ def recordEntry():
     # Since lists are zero index, I make sure to subtract one to prevent errors in the boundary numbers (without it, bay 10 from user input could mean bay 11 which would not exist)
     desired_bay = lstBays[i_bay - 1]
 
-    if desired_bay.isOccupied == True:
+    if desired_bay.isOccupied() == True:
         print("Sorry, the bay is already occupied.")
     else:
         s_plate = input("Please enter your license plate: ")
@@ -112,7 +112,7 @@ def recordEntry():
         if recorded:
             print("Success! Your car " + s_plate + " has been parked in " + s_bay)
 
-def removeCar():
+def removeCar(lstBays):
     s_bay = input("Please enter bay number to remove your car (1 - 10): ")
 
 # This is the other line where I've implemented my Part A feedback on validation
@@ -124,7 +124,7 @@ def removeCar():
     i_bay = int(s_bay)
     desired_bay = lstBays[i_bay - 1]
 
-    if lstBays.isOccupied(s_bay) == False:
+    if desired_bay.isOccupied() == False:
         print("Error: Bay is already empty. ")
     else:
         removed = lstBays.removeCar()
@@ -144,7 +144,7 @@ def displayMenu():
         ParkingBay(10),
     ]
 
-    loadData()
+    loadData(lstBays)
 
     while_running = True
     while while_running:
@@ -163,16 +163,16 @@ def displayMenu():
 
         if user_choice == "1":
             print("Option 1 selected.")
-            recordEntry()
+            recordEntry(lstBays)
         elif user_choice == "2":
-            removeCar()
+            removeCar(lstBays)
         elif user_choice == "3":
             print("Option 3 selected.")
-            viewStatus()
+            viewStatus(lstBays)
         elif user_choice == "4":
-            calculateTotals()
+            calculateTotals(lstBays)
         elif user_choice == "5":
-            saveData()
+            saveData(lstBays)
             while_running = False
             print("The program will exit now. Thank you for using the program.")
 
@@ -184,7 +184,7 @@ def displayMenu():
 # Description: The branch of Part B assessment that is used to code the file-related functions.
 # Author: Sanjeev J
 # Date created: 12/10/2026
-def saveData():
+def saveData(lstBays):
     file = open("parking_data.txt", "w")
     # If I've coded this correctly, the only difference I see is that I replace the bottom 3 lines of code with the public methods instead.
     for bay in lstBays:
@@ -196,7 +196,7 @@ def saveData():
     print("Thank you user. Your data has been successfully saved to parking_data.txt")
 
 
-def loadData():
+def loadData(lstBays):
     file = open("parking_data.txt", "r")
     for line in file:
         clean_line = line.strip()
