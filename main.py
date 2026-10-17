@@ -68,12 +68,27 @@ def viewStatus(lstBays):
         else:
             bay_symbols.append(" Free ")
 
+    print(f"""
+    
+        -------------------- -------------------- -------------------- -------------------- --------------------      
+       |       Bay 1:       |        Bay 2:      |        Bay 3:      |        Bay 4:      |        Bay 5:      |
+       |{bay_symbols[0]:^20}|{bay_symbols[1]:^20}|{bay_symbols[2]:^20}|{bay_symbols[3]:^20}|{bay_symbols[4]:^20}|
+       |                    |                    |                    |                    |                    |
+        -------------------- -------------------- -------------------- -------------------- --------------------
+        -------------------- -------------------- -------------------- -------------------- --------------------      
+       |       Bay 6:       |        Bay 7:      |        Bay 8:      |        Bay 9:      |        Bay 10:     |
+       |{bay_symbols[5]:^20}|{bay_symbols[6]:^20}|{bay_symbols[7]:^20}|{bay_symbols[8]:^20}|{bay_symbols[9]:^20}|
+       |                    |                    |                    |                    |                    |
+        -------------------- -------------------- -------------------- -------------------- --------------------
+        
+        """)
+
 def calculateTotals(lstBays):
     free_bays = 0
     occupied_bays = 0
 
 
-    for bay in lstBays():
+    for bay in lstBays:
         if bay.isOccupied() == True:
             occupied_bays += 1
         else:
@@ -127,7 +142,7 @@ def removeCar(lstBays):
     if desired_bay.isOccupied() == False:
         print("Error: Bay is already empty. ")
     else:
-        removed = lstBays.removeCar()
+        lstBays.removeCar()
         print("Success! Your car has been removed.")
 
 def displayMenu():
