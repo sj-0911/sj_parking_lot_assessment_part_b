@@ -3,8 +3,6 @@
 # Author: Sanjeev J
 # Date created: 04/10/2026
 
-
-
 class ParkingBay:
 
 # this is the constructor; it initialises the attributes (that are private) so that it restricts unauthorised access from users
@@ -34,11 +32,6 @@ class ParkingBay:
             self.__s_plate = ""
             self.__occupancy = False
             return True
-
-
-
-
-
 
 # this is 3rd method (1st getter) under the class that will return the boolean value. Since I initialised it as private, the user will use this public method to access it.
     def isOccupied(self):
@@ -126,10 +119,8 @@ def recordEntry(lstBays):
             s_plate = input("Please enter your license plate: ")
 
     # I just realised that I need to call the public method somewhere within the function, so I'm assigning it to a variable so it gets called (given that if it passes the validation checks)
-        recorded = desired_bay.parkCar(s_plate)
-
-        if recorded:
-            print("Success! Your car " + s_plate + " has been parked in " + s_bay)
+        desired_bay.parkCar(s_plate)
+        print("Success! Your car " + s_plate + " has been parked in " + s_bay)
 
 def removeCar(lstBays):
     s_bay = input("Please enter bay number to remove your car (1 - 10): ")
@@ -205,7 +196,7 @@ def displayMenu():
 # Date created: 12/10/2026
 def saveData(lstBays):
     file = open("parking_data.txt", "w")
-    # If I've coded this correctly, the only difference I see is that I replace the bottom 3 lines of code with the public methods instead.
+    # If I've coded this correctly, the only difference I see between part a & b is that I replace the bottom 3 lines of code with the public methods instead.
     for bay in lstBays:
         if bay.isOccupied():
             bayNumber = bay.getBayNumber()
@@ -233,6 +224,7 @@ def loadData(lstBays):
 
         file.close()
         print("Thank you user. The data has been successfully loaded from parking_data.txt")
+        # This is where I got inspiration for the try-except structure: https://realpython.com/ref/builtin-exceptions/filenotfounderror/
     except FileNotFoundError:
         print("Unfortunately, your file cannot be loaded to this program at the moment. Please ensure that the parking_data.txt file exists.")
 
