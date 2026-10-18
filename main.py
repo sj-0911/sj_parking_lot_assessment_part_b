@@ -31,7 +31,7 @@ class ParkingBay:
             print("Error: Bay is already empty.")
             return False
         else:
-            self.__plate = ""
+            self.__s_plate = ""
             self.__occupancy = False
             return True
 
@@ -207,30 +207,34 @@ def saveData(lstBays):
     file = open("parking_data.txt", "w")
     # If I've coded this correctly, the only difference I see is that I replace the bottom 3 lines of code with the public methods instead.
     for bay in lstBays:
-        bayNumber = bay.getBayNumber()
-        s_plate = bay.getPlate()
-        b_occupied = bay.isOccupied()
-        file.write(str(bayNumber) + "," + s_plate + "," + str(b_occupied) + "\n")
+        if bay.isOccupied():
+            bayNumber = bay.getBayNumber()
+            s_plate = bay.getPlate()
+            b_occupied = bay.isOccupied()
+            file.write(str(bayNumber) + "," + s_plate + "," + str(b_occupied) + "\n")
     file.close()
     print("Thank you user. Your data has been successfully saved to parking_data.txt")
 
 
 def loadData(lstBays):
-    file = open("parking_data.txt", "r")
-    for line in file:
-        clean_line = line.strip()
-        if clean_line != "":
-            list_data = clean_line.split(",")
+    try:
+        file = open("parking_data.txt", "r")
+        for line in file:
+            clean_line = line.strip()
+            if clean_line != "":
+                list_data = clean_line.split(",")
 
-            i_bay = int(list_data[0])
-            s_plate = list_data[1]
-            s_occupied = list_data[2]
+                i_bay = int(list_data[0])
+                s_plate = list_data[1]
+                s_occupied = list_data[2]
 
-            if s_occupied == "True":
-                lstBays[i_bay - 1].parkCar(s_plate)
+                if s_occupied == "True":
+                    lstBays[i_bay - 1].parkCar(s_plate)
 
-    file.close()
-    print("Thank you user. The data has been successfully loaded from parking_data.txt")
+        file.close()
+        print("Thank you user. The data has been successfully loaded from parking_data.txt")
+    except FileNotFoundError:
+        print("Unfortunately, your file cannot be loaded to this program at the moment. Please ensure that the parking_data.txt file exists.")
 
 displayMenu()
 
