@@ -15,21 +15,24 @@ class ParkingBay:
 
     # this is a mutator method that will record the entry of a car in the parking bay (the list of objects). True is returned upon successful parking, and basic validation is included.
     def parkCar(self, s_plate):
-        if self.__occupancy == True:
+        if self.__occupancy:
             print("Error: Bay is already occupied.")
+            return False
         elif s_plate == "":
             print("Error: Plate number cannot be empty.")
+            return False
         else:
             self.__s_plate = s_plate
             self.__occupancy = True
             return True
     # this is the second mutator method that will remove the car. It validates whether the user is trying to remove from an unoccupied bay (to which it denies it and displays an error), and removes it successfully if no user input flaws are there.
     def removeCar(self):
-        if self.__occupancy == False:
+        if not self.__occupancy:
             print("Error: Bay is already empty.")
+            return False
         else:
-            __plate = ""
-            __occupancy = False
+            self.__plate = ""
+            self.__occupancy = False
             return True
 
 
@@ -61,7 +64,7 @@ def viewStatus(lstBays):
     bay_symbols = []
     for bay in lstBays:
         # I think you call the public method here instead of directly accessing the list (and the .txt file)
-        if bay.isOccupied() == True:
+        if bay.isOccupied():
             s_plate = bay.getPlate()
             # I am going to implement the feedback Ms Constanza has given me, and include the license plates on occupied bays as well.
             bay_symbols.append(f" {s_plate} ")
@@ -89,7 +92,7 @@ def calculateTotals(lstBays):
 
 
     for bay in lstBays:
-        if bay.isOccupied() == True:
+        if bay.isOccupied():
             occupied_bays += 1
         else:
             free_bays += 1
@@ -98,7 +101,7 @@ def calculateTotals(lstBays):
 
     print("The number of free bays available is: " + str(free_bays))
     print("The number of occupied bays available is: " + str(occupied_bays))
-    print("The number of total bays are: " + str(occupied_bays + free_bays))
+    print("The number of total bays are: " + str(total_bays))
 
 def recordEntry(lstBays):
     s_bay = input("Please enter bay number to enter your car (1 - 10): ")
@@ -112,14 +115,14 @@ def recordEntry(lstBays):
     # Since lists are zero index, I make sure to subtract one to prevent errors in the boundary numbers (without it, bay 10 from user input could mean bay 11 which would not exist)
     desired_bay = lstBays[i_bay - 1]
 
-    if desired_bay.isOccupied() == True:
+    if desired_bay.isOccupied():
         print("Sorry, the bay is already occupied.")
     else:
         s_plate = input("Please enter your license plate: ")
 
         while s_plate == "":
             print("Error: Number plate cannot be empty.")
-            number_plate = input("Please enter your license plate: ")
+            s_plate = input("Please enter your license plate: ")
 
     # I just realised that I need to call the public method somewhere within the function, so I'm assigning it to a variable so it gets called (given that if it passes the validation checks)
         recorded = desired_bay.parkCar(s_plate)
@@ -139,10 +142,10 @@ def removeCar(lstBays):
     i_bay = int(s_bay)
     desired_bay = lstBays[i_bay - 1]
 
-    if desired_bay.isOccupied() == False:
+    if not desired_bay.isOccupied():
         print("Error: Bay is already empty. ")
     else:
-        lstBays.removeCar()
+        desired_bay.removeCar()
         print("Success! Your car has been removed.")
 
 def displayMenu():
@@ -223,10 +226,7 @@ def loadData(lstBays):
             s_occupied = list_data[2]
 
             if s_occupied == "True":
-                b_occupied = True
                 lstBays[i_bay - 1].parkCar(s_plate)
-            else:
-                b_occupied = False
 
     file.close()
     print("Thank you user. The data has been successfully loaded from parking_data.txt")
