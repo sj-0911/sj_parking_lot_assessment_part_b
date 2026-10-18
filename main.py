@@ -106,8 +106,9 @@ def calculateTotals(lstBays):
 def recordEntry(lstBays):
     s_bay = input("Please enter bay number to enter your car (1 - 10): ")
 
-# I have implemented my Part A feedback here; in case the bay count expands in size, my validation is scalable and doesn't need to be modified
-    while s_bay not in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:
+# I have implemented my Part A feedback here; in case the bay count expands in size, my validation is scalable and doesn't need to be modified (I've referenced the .isdigit() built-in function in my documentation)
+# Link: https://www.geeksforgeeks.org/python/python-string-isdigit-method/
+    while not s_bay.isdigit() or not (1 <= int(s_bay) <= len(lstBays)):
         print("Invalid bay number. Please choose between 1 and 10.")
         s_bay = input("Please enter bay number to enter your car (1 - 10): ")
 
@@ -134,7 +135,7 @@ def removeCar(lstBays):
     s_bay = input("Please enter bay number to remove your car (1 - 10): ")
 
 # This is the other line where I've implemented my Part A feedback on validation
-    while s_bay not in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]:
+    while not s_bay.isdigit() or not (1 <= int(s_bay) <= len(lstBays)):
         print("Invalid bay number. Please choose between 1 and 10.")
         s_bay = input("Please enter bay number to remove your car (1 - 10): ")
 
@@ -175,7 +176,7 @@ def displayMenu():
 
         user_choice = input("Please select an option from 1-5: ")
 
-        while user_choice not in ["1", "2", "3", "4", "5"]:
+        while not user_choice.isdigit() or not (1 <= int(user_choice) <= len(lstBays)):
             print("Invalid choice. Please choose only provided menu options")
             user_choice = input("Please select an option from 1-5: ")
 
